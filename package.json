@@ -12,7 +12,6 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.27",
     "core-js": "^2.6.5",
-    "jquery": "^1.9.1",
     "vue": "^2.6.10",
     "vue2-editor": "^2.10.0",
     "vuejs-datepicker": "^1.6.2",
