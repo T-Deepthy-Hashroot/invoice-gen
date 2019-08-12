@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
     "start": "node server.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
 
   },
   "dependencies": {
@@ -19,6 +17,10 @@
     "vue2-editor": "^2.10.0",
     "vuejs-datepicker": "^1.6.2",
     "vuex": "^3.1.1"
+  },
+  "engines": {
+    "node": "10.16.2",
+    "npm": "6.9.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
