@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "node build/dev-server.js",
+    "build": "node build/build.js",
+    "start": "node server.js", 
     "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node server.js"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
