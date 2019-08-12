@@ -1,15 +1,18 @@
-import Vue from 'vue'
-import App from './App.vue'
-import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import Vuex from 'vuex'
+import Vue from 'vue'
+import App from './App/App.vue'
+import store from './store/index'
+import BootstrapVue from 'bootstrap-vue'
+import Vue2Editor from "vue2-editor"
+Vue.use(BootstrapVue);
+Vue.use(Vue2Editor);
 
-Vue.use(Vuex)
-Vue.use(BootstrapVue)
 
-Vue.config.productionTip = false
-
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+document.addEventListener('DOMContentLoaded', () => {
+   new Vue({
+    render: h => h(App),
+    el: '#app',
+    store
+  })
+})
