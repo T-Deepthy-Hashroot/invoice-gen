@@ -88,7 +88,7 @@
                 <thead>
                   <tr>
                     <th>Index</th>
-                    <th>HSN/SSN</th>
+                    <th>HSN/SAC</th>
                     <th>Item Description</th>
                     <th>Quantity</th>
                     <th>Unit Price</th>
@@ -137,7 +137,7 @@
                   </tr>
                   
                   <template
-                    v-if="(cdetails[0].state_code==cldetails[0].state_code) && cdetails[0].gst_no && cldetails[0].gst_no"
+                    v-if="(cdetails[0].state_code==cldetails[0].state_code) && cdetails[0].gst_no && cldetails[0].gst_no && status==true"
                   >
                     <tr>
                       <td colspan="4">
@@ -163,7 +163,7 @@
                     </tr>
                   </template>
                   <template
-                    v-else-if="(cdetails[0].state_code!=cldetails[0].state_code) && cdetails[0].gst_no"
+                    v-else-if="(cdetails[0].state_code!=cldetails[0].state_code) && cdetails[0].gst_no && status==true"
                   >
                     <tr>
                       <td colspan="4">
@@ -179,7 +179,7 @@
                   </template>
 
                   <template
-                    v-else-if="cldetails[0].state_code==32 && cdetails[0].state_code==32 && !cldetails[0].gst_no && cdetails[0].gst_no"
+                    v-else-if="cldetails[0].state_code==32 && cdetails[0].state_code==32 && !cldetails[0].gst_no && cdetails[0].gst_no && status==true"
                   >
                     <tr>
                       <td colspan="4">
@@ -354,40 +354,40 @@ export default {
         this.findkfc();
         this.findGrandTotal();  
     },
-    // generatePdf() {
-    //   if (this.validatePDF())
-    //   {
-    //     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-    //     let url =`/invoice/invoice.pdf?cdetails=${JSON.stringify(this.cdetails)}&cldetails=${JSON.stringify(this.cldetails)}&items=${JSON.stringify(this.items)}&text1=${JSON.stringify(this.text1)}&text2=${JSON.stringify(this.text2)}&footer=${JSON.stringify(this.footer)}&status=${JSON.stringify(this.status)}`
-    //     if(is_chrome)  
-    //     {
-    //       const link = document.createElement('a');
-    //       link.href = url;
-    //       link.click();
-    //     }
+    generatePdf() {
+      if (this.validatePDF())
+      {
+        var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+        let url =`/invoice/invoice.pdf?cdetails=${JSON.stringify(this.cdetails)}&cldetails=${JSON.stringify(this.cldetails)}&items=${JSON.stringify(this.items)}&text1=${JSON.stringify(this.text1)}&text2=${JSON.stringify(this.text2)}&footer=${JSON.stringify(this.footer)}&status=${JSON.stringify(this.status)}`
+        if(is_chrome)  
+        {
+          const link = document.createElement('a');
+          link.href = url;
+          link.click();
+        }
       
-    //     else
-    //     {
-    //         this.validation = false
-    //         window.open(`/invoice/invoice.pdf?cdetails=${JSON.stringify(this.cdetails)}&cldetails=${JSON.stringify(this.cldetails)}&items=${JSON.stringify(this.items)}&text1=${JSON.stringify(this.text1)}&text2=${JSON.stringify(this.text2)}&footer=${JSON.stringify(this.footer)}&status=${JSON.stringify(this.status)}`);
-    //     }
-    //   }
-    //   else
-    //   {
-    //       window.alert("Missing fields");
-    //       this.validation = true
-    //   }
-    // },
-    // changeData(index) {
-    //   if (this.items[index].qty && this.items[index].up) {
-    //     this.items[index].tot = this.items[index].qty * this.items[index].up;
-    //   }
-    //   let subTotal = 0;
-    //   this.items.map(item => {
-    //     subTotal += item.tot;
-    //   });
-    //   this.footer[0].subTotal = subTotal.toFixed(2);
-    // },
+        else
+        {
+            this.validation = false
+            window.open(`/invoice/invoice.pdf?cdetails=${JSON.stringify(this.cdetails)}&cldetails=${JSON.stringify(this.cldetails)}&items=${JSON.stringify(this.items)}&text1=${JSON.stringify(this.text1)}&text2=${JSON.stringify(this.text2)}&footer=${JSON.stringify(this.footer)}&status=${JSON.stringify(this.status)}`);
+        }
+      }
+      else
+      {
+          window.alert("Missing fields");
+          this.validation = true
+      }
+    },
+    changeData(index) {
+      if (this.items[index].qty && this.items[index].up) {
+        this.items[index].tot = this.items[index].qty * this.items[index].up;
+      }
+      let subTotal = 0;
+      this.items.map(item => {
+        subTotal += item.tot;
+      });
+      this.footer[0].subTotal = subTotal.toFixed(2);
+    },
     findDiscount() {
       if (
         this.footer[0].discountPercentage > 100 ||
