@@ -1,18 +1,8 @@
-// server.js
-
-var express = require('express');
-// eslint-disable-next-line no-unused-vars
-var path = require('path');
-var serveStatic = require('serve-static');
-
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
+const express = require('express');
+const serveStatic = require("serve-static")
+const path = require('path');
 app = express();
-// eslint-disable-next-line no-undef
-app.use(serveStatic(__dirname + '/dist'));
-
-var port = process.env.PORT || 5000;
-// eslint-disable-next-line no-undef
+app.use(serveStatic(path.join(__dirname, 'dist')));
+const port = process.env.PORT || 80;
 app.listen(port);
-
-// eslint-disable-next-line no-console
-console.log('server started ' + port);
